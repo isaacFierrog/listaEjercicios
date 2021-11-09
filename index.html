@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <header class="row">
+            <section class="col">
+                <h1>{{ titulo }}</h1>
+                <div>
+                    <input type="text" class="form-control" @keyup.enter="agregarEjercicio" v-model="nuevoEjercicio">
+                    <button class="btn btn-primary mt-3" @click="agregarEjercicio">Guardar</button>
+                </div>
+            </section>
+        </header>
+        <main class="row mt-3">
+            <ul class="col list-group">
+                <li v-for="(ejercicio, index) in ejercicios" class="list-group-item list-group-item-action d-flex justify-content-between" :class="{ 'list-group-item-danger': !ejercicio.estado, 'list-group-item-success': ejercicio.estado }">
+                    <div>
+                        <span>{{ ejercicio.nombre }}</span> - 
+                        <span v-if="!ejercicio.estado">Sin terminar</span>
+                        <span v-else>Terminado</span>
+                    </div>
+                    <div>
+                        <i @click="completarEjercicio(index)" class="fas fa-check"></i>
+                        <i @click="eliminarEjercicio(index)" class="far fa-trash-alt ml-2"></i>
+                    </div>
+                </li>
+            </ul>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
